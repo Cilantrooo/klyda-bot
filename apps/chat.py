@@ -37,6 +37,7 @@ class Chat(Extension):
                     for _ in range(retries):
                         try:
                             response_tokens = []
+                            chatbot.delete_all_conversations()
                             for resp in chatbot.query(messages1 + "Klyda:", stream=True):
                                 if resp is not None and "token" in resp:
                                     response_tokens.append(resp["token"])
