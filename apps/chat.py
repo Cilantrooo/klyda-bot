@@ -9,7 +9,7 @@ sign = Login(EMAIL, PASSWD)
 cookies = sign.login(cookie_dir_path=cookie_path_dir, save_cookies=True)
 
 chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
-chatbot.switch_llm(1)
+chatbot.switch_llm(0)
 
 async def fetch_message_history(channel, limit=10):
     messages_text = ""
