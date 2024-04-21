@@ -9,7 +9,6 @@ cookie_path_dir = "./cookies/"
 sign = Login(EMAIL, PASSWD)
 cookies = sign.login(cookie_dir_path=cookie_path_dir, save_cookies=True)
 
-# Create your ChatBot
 chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
 chatbot.switch_llm(1)
 
