@@ -16,6 +16,7 @@ async def fetch_message_history(channel):
     messages = await channel.history(limit=10).flatten()
     for message in reversed(messages):
         messages_text += f"{message.author.display_name}: {message.content}\n"
+        print(messages_text)
     return messages_text
 
 
@@ -43,7 +44,6 @@ class Chat(Extension):
                                 if resp is not None and "token" in resp:
                                     response_tokens.append(resp["token"])
                                     response = ("".join(response_tokens))
-                                    print("Response:", response)
                                     await msg.edit(content=(response))
                             if not response_tokens:
                                 print("Response tokens empty, retrying...")
