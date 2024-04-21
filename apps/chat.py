@@ -1,5 +1,4 @@
 from interactions import listen, Extension, max_concurrency
-import asyncio
 
 from hugchat import hugchat
 from hugchat.login import Login
@@ -33,7 +32,6 @@ class Chat(Extension):
                     response_tokens = []
                     for resp in chatbot.query(messages1 + "Klyda:", stream=True):
                         if resp is not None and "token" in resp:
-                            asyncio.sleep(1.5)
                             response_tokens.append(resp["token"])
                             response = ("".join(response_tokens))
                             print("Response:", response)
@@ -45,5 +43,3 @@ class Chat(Extension):
                     break
                 except Exception as e:
                     print(f"An exception occurred: {e}, retrying...")
-                    await asyncio.sleep(1)
-
