@@ -9,18 +9,12 @@ sign = Login(EMAIL, PASSWD)
 cookies = sign.login(cookie_dir_path=cookie_path_dir, save_cookies=True)
 
 chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
-chatbot.switch_llm(1)
+chatbot.switch_llm(4)
 
-async def fetch_message_history(channel, limit=10):
-    if channel is None:
-        return "Channel is None, cannot fetch message history."
-    
+async def fetch_message_history(channel):
     messages_text = ""
-    messages = await channel.history(limit=limit).flatten()
+    messages = await channel.history(limit=10).flatten()
     for message in reversed(messages):
-        # Skip over NoneType messages
-        if message is None:
-            continue
         messages_text += f"{message.author.display_name}: {message.content}\n"
     return messages_text
 
@@ -43,8 +37,8 @@ class Chat(Extension):
                     retries = 5
                     for _ in range(retries):
                         try:
+                            chatbot.new_conversation(switch_to = True)
                             response_tokens = []
-                            chatbot.delete_all_conversations()
                             for resp in chatbot.query(messages1 + "Klyda:", stream=True):
                                 if resp is not None and "token" in resp:
                                     response_tokens.append(resp["token"])
