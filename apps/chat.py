@@ -2,7 +2,7 @@ from interactions import listen, Extension, max_concurrency
 import asyncio
 
 from hugchat import hugchat
-from hugchat.login import Login
+from hugchat.login import Logi
 EMAIL = "arek.jkirejczyk@gmail.com"
 PASSWD = "Fufkicztery4"
 cookie_path_dir = "./cookies/"
