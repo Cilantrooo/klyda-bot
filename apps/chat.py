@@ -12,11 +12,18 @@ chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
 chatbot.switch_llm(1)
 
 async def fetch_message_history(channel, limit=10):
+    if channel is None:
+        return "Channel is None, cannot fetch message history."
+    
     messages_text = ""
     messages = await channel.history(limit=limit).flatten()
     for message in reversed(messages):
+        # Skip over NoneType messages
+        if message is None:
+            continue
         messages_text += f"{message.author.display_name}: {message.content}\n"
     return messages_text
+
 
 import asyncio
 
