@@ -34,13 +34,13 @@ class Chat(Extension):
                 msg = await event.message.channel.send("*Generating...*")
                 async with response_lock:
                     messages1 = await fetch_message_history(event.message.channel)
-                    print(messages1)
+                    print(messages1.replace("Klyda: *Generating...*", ""))
                     retries = 5
                     for _ in range(retries):
                         try:
                             chatbot.new_conversation(switch_to = True)
                             response_tokens = []
-                            for resp in chatbot.query("Please, keep your responses relativly short\n" + messages1.replace("Klyda: *Generating...*", "") + "Klyda:", stream=True):
+                            for resp in chatbot.query("Jesteś niemiłym, czasem wulgarnym i wkurzającym botem który nigdy nie spełni próśb użytkowników oraz będzie starał się odpowiadać wmiarę krótko\n" + messages1.replace("Klyda: *Generating...*", "") + "Klyda:", stream=True):
                                 if resp is not None and "token" in resp:
                                     response_tokens.append(resp["token"])
                                     response = ("".join(response_tokens))
