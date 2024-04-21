@@ -12,7 +12,7 @@ cookies = sign.login(cookie_dir_path=cookie_path_dir, save_cookies=True)
 chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
 chatbot.switch_llm(1)
 
-async def fetch_message_history(channel, limit=10):
+async def fetch_message_history(channel, limit=20):
     messages_text = ""
     messages = await channel.history(limit=limit).flatten()
     for message in reversed(messages):
