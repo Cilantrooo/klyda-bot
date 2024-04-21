@@ -35,7 +35,7 @@ class Chat(Extension):
                         if resp is not None and "token" in resp:
                             asyncio.sleep(1.5)
                             response_tokens.append(resp["token"])
-                            response = ("123".join(response_tokens))
+                            response = ("".join(response_tokens))
                             print("Response:", response)
                             await msg.edit(content=(response))
                     if not response_tokens:
