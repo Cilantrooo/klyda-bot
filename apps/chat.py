@@ -11,7 +11,7 @@ cookies = sign.login(cookie_dir_path=cookie_path_dir, save_cookies=True)
 chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
 chatbot.switch_llm(1)
 
-async def fetch_message_history(channel, limit=5):
+async def fetch_message_history(channel, limit=10):
     messages_text = ""
     messages = await channel.history(limit=limit).flatten()
     for message in reversed(messages):
@@ -40,7 +40,7 @@ class Chat(Extension):
                         try:
                             chatbot.new_conversation(switch_to = True)
                             response_tokens = []
-                            for resp in chatbot.query("Please, keep your responses very short\n" + messages1 + "Klyda:", stream=True):
+                            for resp in chatbot.query("Please, keep your responses relativly short\n" + messages1.replace("Klyda: *Generating...*", "") + "Klyda:", stream=True):
                                 if resp is not None and "token" in resp:
                                     response_tokens.append(resp["token"])
                                     response = ("".join(response_tokens))
