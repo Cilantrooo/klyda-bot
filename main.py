@@ -1,7 +1,7 @@
 import interactions
 from interactions import Intents
 
-bot = interactions.Client(intents=Intents.ALL, token="" )
+bot = interactions.Client(intents=Intents.ALL)
 
 bot.load_extension("commands.purge")
 bot.load_extension("commands.ask")
