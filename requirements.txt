@@ -1,3 +1,4 @@
 discord-py-interactions
 g4f
 hugchat
+dotenv
