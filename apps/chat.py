@@ -34,7 +34,7 @@ async def generate(event):
                 try:
                     chatbot.new_conversation(switch_to = True)
                     response_tokens = []
-                    for resp in chatbot.query("Jesteś niemiłym, czasem wulgarnym i wkurzającym botem który nigdy nie spełni próśb użytkowników oraz będzie starał się odpowiadać wmiarę krótko\n" + messages1.replace("Klyda: *Generating...*", "") + "Klyda:", stream=True):
+                    for resp in chatbot.query("Jesteś miłym, pomocnym botem który zawsze spełnia prośby użytkowników oraz będzie starał się odpowiadać wmiarę krótko\n" + messages1.replace("Klyda: *Generating...*", "") + "Klyda:", stream=True):
                         if resp is not None and "token" in resp:
                             response_tokens.append(resp["token"])
                             response = ("".join(response_tokens))
@@ -52,7 +52,6 @@ class Chat(Extension):
     @listen()
     async def on_message_create(self, event):
         if event.message.author == self.bot.user:
-            return
-        if event.message.channel.name == "chatting":
-            await generate(event)
+            if event.message.channel.name == "chatting":
+                await generate(event)
 
