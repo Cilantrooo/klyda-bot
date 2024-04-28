@@ -52,6 +52,8 @@ class Chat(Extension):
     @listen()
     async def on_message_create(self, event):
         if event.message.author == self.bot.user:
+            print("Debug message 1")
             if event.message.channel.name == "chatting":
+                print("Debug message 2")
                 await generate(event)
 
